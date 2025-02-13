@@ -4,9 +4,15 @@
 <p>This is an Assets Management System that allows employees to request office items, tracks asset assignments, and enables efficient approval workflows between the HR department and the manager. 
 The system also maintains records of assigned assets for easy retrieval when an employee resigns. </p>
 
+<br>
 [ER Diagram](https://lucid.app/lucidchart/a3306a6d-dd63-4e10-aa91-82ac93e66541/edit?invitationId=inv_d4963a3c-4eeb-4c3e-a5d1-a6cae4cb8226&page=0_0#)
+<img width="890" alt="image" src="https://github.com/user-attachments/assets/7bf4f9e1-23df-41ca-adf7-2930a5a9d992" />
+
+
 <br>
 [Database Table Design](https://docs.google.com/document/d/14YLVsWOCC5YYNDU1jR4f3EzR9nHA6FsWQ8jM2PKTqWo/edit?usp=sharing)
+<img width="640" alt="image" src="https://github.com/user-attachments/assets/320ab549-1ec7-451a-9679-87126875b9e9" />
+
 
 ## Running Locally
 [Setting Up the Backend (PHP)]
@@ -74,7 +80,7 @@ The system also maintains records of assigned assets for easy retrieval when an 
     Fetch Data from PHP API in React:
         In your React app, use the fetch API to call your PHP backend:
 
-            ```javascript
+   ```js
             import React, { useEffect, useState } from 'react';
 
             function App() {
@@ -100,7 +106,7 @@ The system also maintains records of assigned assets for easy retrieval when an 
             }
 
             export default App;
-            ```
+   ```
 
 6. Handle CORS:
     Ensure your PHP backend allows requests from your React app by setting the Access-Control-Allow-Origin header (as shown in the PHP example above).
