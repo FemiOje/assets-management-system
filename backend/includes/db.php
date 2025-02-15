@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'assets_management';
+$dbname = 'asset_mgt_db';
 $username = 'root';
 $password = '';
 

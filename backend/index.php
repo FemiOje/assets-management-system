@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "my_database";
+$dbname = "asset_mgt_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch data from MySQL
-$sql = "SELECT * FROM my_table";
+$sql = "SELECT * FROM employees";
 $result = $conn->query($sql);
 
 $data = array();
