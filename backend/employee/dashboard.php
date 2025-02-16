@@ -33,6 +33,13 @@ include "../includes/db.php";
         ?>
     </div>
 
+    <nav>
+        <a href="http://">Personal Information</a>
+        <a href="http://">Request Asset</a>
+        <a href="http://">View submitted requests</a>
+        <a href="http://">View assets assigned to me</a>
+    </nav>
+
     <a href="../logout.php" class="logout-button">Logout</a>
 </body>
 </html>
