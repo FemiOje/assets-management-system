@@ -15,6 +15,8 @@ $valid_sections = [
     'request_asset',
     'view_requests',
     'view_assets', 
+    'view_all_assets', 
+    'add_new_asset',
     'forward_request',
     'manage_employees'
 ];

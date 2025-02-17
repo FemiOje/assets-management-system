@@ -12,6 +12,14 @@
             <a href="?section=view_requests">My Requests</a>
         </li>
 
+        <li class="<?= $section === 'view_all_assets' ? 'active' : '' ?>">
+            <a href="?section=view_all_assets">View all Assets</a>
+        </li>
+
+        <li class="<?= $section === 'add_new_asset' ? 'active' : '' ?>">
+            <a href="?section=add_new_asset">Add New Asset</a>
+        </li>
+
         <li class="<?= $section === 'view_assets' ? 'active' : '' ?>">
             <a href="?section=view_assets">Assigned Assets</a>
         </li>
