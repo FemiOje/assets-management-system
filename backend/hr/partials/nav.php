@@ -24,7 +24,7 @@
             <a href="?section=view_assets">Assigned Assets</a>
         </li>
 
-        <li class="<?= $section === 'forward_request' ? 'active' : '' ?>">
+        <li class="<?= $section === 'pending_requests' ? 'active' : '' ?>">
             <a href="?section=forward_request">View All Pending Requests</a>
         </li>
 
