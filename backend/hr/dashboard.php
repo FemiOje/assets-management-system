@@ -1,43 +1,49 @@
-<?php 
+<?php
 include "../includes/auth.php";
 checkUserRole(['HR']);
-include "../includes/db.php"; 
+include "../includes/db.php";
+
+$query = "SELECT * FROM employees WHERE email = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "s", $_SESSION['user_email']);
+mysqli_stmt_execute($stmt);
+$employee = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+mysqli_stmt_close($stmt);
+
+$valid_sections = [
+    'personal_info',
+    'request_asset',
+    'view_requests',
+    'view_assets', 
+    'forward_request',
+    'manage_employees'
+];
+
+$section = $_GET['section'] ?? 'personal_info';
+if (!in_array($section, $valid_sections)) {
+    $section = 'personal_info';
+}
+
+include "partials/header.php";
 ?>
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <?php include "partials/nav.php"; ?>
+    </aside>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Dashboard</title>
-</head>
-<body>    
-    <div id="requests">
-        <?php
-        // Use prepared statement to prevent SQL injection
-        $query = "SELECT * FROM employees WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "s", $_SESSION['user_email']);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        
-        if ($result) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<p>Welcome to the HR dashboard: " . htmlspecialchars($row['first_name']) . " " . 
-                     htmlspecialchars($row['last_name']) . "</p>";
-            }
+    <main class="main-content">
+        <?php 
+        $section_file = "sections/{$section}.php";
+        if(file_exists($section_file)) {
+            include $section_file;
         } else {
-            echo "Error loading employee data";
+            echo "<div class='alert alert-danger'>Invalid section</div>";
         }
-        
-        mysqli_stmt_close($stmt);
         ?>
-    </div>
-
-    <a href="../logout.php" class="logout-button">Logout</a>
-</body>
-</html>
+    </main>
+</div>
 
 <?php
+include "partials/footer.php";
 mysqli_close($conn);
 ?>
