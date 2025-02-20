@@ -1,35 +1,35 @@
 <nav class="dashboard-nav">
     <ul>
-        <li class="<?= $section === 'personal_info' ? 'active' : '' ?>">
-            <a href="?section=personal_info">Personal Information</a>
-        </li>
-        
-        <li class="<?= $section === 'request_asset' ? 'active' : '' ?>">
-            <a href="?section=request_asset">Request Asset</a>
-        </li>
-        
-        <li class="<?= $section === 'view_requests' ? 'active' : '' ?>">
-            <a href="?section=view_requests">My Requests</a>
+        <li>
+            <a href="?section=personal_info" class="<?= $section === 'personal_info' ? 'active' : '' ?>">Personal Information</a>
         </li>
 
-        <li class="<?= $section === 'view_all_assets' ? 'active' : '' ?>">
-            <a href="?section=view_all_assets">View all Assets</a>
+        <li>
+            <a href="?section=request_asset" class="<?= $section === 'request_asset' ? 'active' : '' ?>">Request Asset</a>
         </li>
 
-        <li class="<?= $section === 'add_new_asset' ? 'active' : '' ?>">
-            <a href="?section=add_new_asset">Add New Asset</a>
+        <li>
+            <a href="?section=view_requests" class="<?= $section === 'view_requests' ? 'active' : '' ?>">My Requests</a>
         </li>
 
-        <li class="<?= $section === 'view_assets' ? 'active' : '' ?>">
-            <a href="?section=view_assets">Assigned Assets</a>
+        <li>
+            <a href="?section=view_all_assets" class="<?= $section === 'view_all_assets' ? 'active' : '' ?>">View all Assets</a>
         </li>
 
-        <li class="<?= $section === 'pending_requests' ? 'active' : '' ?>">
-            <a href="?section=forward_request">View All Pending Requests</a>
+        <li>
+            <a href="?section=add_new_asset" class="<?= $section === 'add_new_asset' ? 'active' : '' ?>">Add New Asset</a>
         </li>
 
-        <li class="<?= $section === 'manage_employees' ? 'active' : '' ?>">
-            <a href="?section=manage_employees">Manage Employees</a>
+        <li>
+            <a href="?section=view_assets" class="<?= $section === 'view_assets' ? 'active' : '' ?>">Assigned Assets</a>
+        </li>
+
+        <li>
+            <a href="?section=forward_request" class="<?= $section === 'pending_requests' ? 'active' : '' ?>">View All Pending Requests</a>
+        </li>
+
+        <li>
+            <a href="?section=manage_employees" class="<?= $section === 'manage_employees' ? 'active' : '' ?>">Manage Employees</a>
         </li>
         <li class="logout">
             <a href="../logout.php">Logout</a>

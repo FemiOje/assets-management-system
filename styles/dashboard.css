@@ -80,7 +80,7 @@ footer {
     color: #ecf0f1;
     text-align: center;
     padding: 15px;
-    margin-top: auto; /* Push the footer to the bottom */
+    margin-top: auto;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 

@@ -14,8 +14,8 @@ $valid_sections = [
     'personal_info',
     'request_asset',
     'view_requests',
-    'view_assets', 
-    'view_all_assets', 
+    'view_assets',
+    'view_all_assets',
     'add_new_asset',
     'request_action',
     'manage_employees'
@@ -29,20 +29,25 @@ if (!in_array($section, $valid_sections)) {
 include "partials/header.php";
 ?>
 <div class="dashboard-container">
-    <aside class="sidebar">
-        <?php include "partials/nav.php"; ?>
-    </aside>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <?php include "partials/nav.php"; ?>
+        </aside>
 
-    <main class="main-content">
-        <?php 
-        $section_file = "sections/{$section}.php";
-        if(file_exists($section_file)) {
-            include $section_file;
-        } else {
-            echo "<div class='alert alert-danger'>Invalid section</div>";
-        }
-        ?>
-    </main>
+        <!-- Main Content -->
+        <main class="main-content">
+            <?php
+            $section_file = "sections/{$section}.php";
+            if (file_exists($section_file)) {
+                include $section_file;
+            } else {
+                echo "<div class='alert alert-danger'>Invalid section</div>";
+            }
+            ?>
+        </main>
+    </div>
 </div>
 
 <?php
