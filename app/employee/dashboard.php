@@ -1,6 +1,3 @@
-
-
-<!-- ============================================================ -->
 <?php
 include "../includes/auth.php";
 checkUserRole(['EMPLOYEE']);

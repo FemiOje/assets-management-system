@@ -29,20 +29,27 @@ if (!in_array($section, $valid_sections)) {
 include "partials/header.php";
 ?>
 <div class="dashboard-container">
-    <aside class="sidebar">
-        <?php include "partials/nav.php"; ?>
-    </aside>
 
-    <main class="main-content">
-        <?php 
-        $section_file = "sections/{$section}.php";
-        if(file_exists($section_file)) {
-            include $section_file;
-        } else {
-            echo "<div class='alert alert-danger'>Invalid section</div>";
-        }
-        ?>
-    </main>
+<div class="dashboard-container">
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <?php include "partials/nav.php"; ?>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <?php 
+            $section_file = "sections/{$section}.php";
+            if(file_exists($section_file)) {
+                include $section_file;
+            } else {
+                echo "<div class='alert alert-danger'>Invalid section</div>";
+            }
+            ?>
+        </main>
+    </div>
 </div>
 
 <?php
