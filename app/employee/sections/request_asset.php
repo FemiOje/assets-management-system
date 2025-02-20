@@ -1,7 +1,6 @@
 <?php
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate inputs
     $asset_id = $_POST['asset_id'] ?? null;
     $quantity = $_POST['quantity'] ?? null;
 
@@ -15,10 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['quantity'] = 'Quantity must be at least 1.';
     }
 
-    // If no errors, insert the request
     if (empty($errors)) {
-        $employee_id = $employee['employee_id']; // From session/auth
-        $status = 'SUBMITTED'; // Default status
+        $employee_id = $employee['employee_id'];
+        $status = 'SUBMITTED';
 
         $sql = "INSERT INTO requests (employee_id, asset_id, quantity, status) 
                 VALUES (?, ?, ?, ?)";
@@ -33,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         mysqli_stmt_close($stmt);
     } else {
-        // Display errors
         echo "<div class='alert alert-danger'>";
         foreach ($errors as $error) {
             echo "<p>$error</p>";

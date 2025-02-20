@@ -1,3 +1,6 @@
+
+
+<!-- ============================================================ -->
 <?php
 include "../includes/auth.php";
 checkUserRole(['EMPLOYEE']);
@@ -25,23 +28,30 @@ if (!in_array($section, $valid_sections)) {
 include "partials/header.php";
 ?>
 <div class="dashboard-container">
-    <aside class="sidebar">
-        <?php include "partials/nav.php"; ?>
-    </aside>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <?php include "partials/nav.php"; ?>
+        </aside>
 
-    <main class="main-content">
-        <?php 
-        $section_file = "sections/{$section}.php";
-        if(file_exists($section_file)) {
-            include $section_file;
-        } else {
-            echo "<div class='alert alert-danger'>Invalid section</div>";
-        }
-        ?>
-    </main>
+        <!-- Main Content -->
+        <main class="main-content">
+            <?php 
+            $section_file = "sections/{$section}.php";
+            if(file_exists($section_file)) {
+                include $section_file;
+            } else {
+                echo "<div class='alert alert-danger'>Invalid section</div>";
+            }
+            ?>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <?php include "partials/footer.php"; ?>
 </div>
 
 <?php
-include "partials/footer.php";
 mysqli_close($conn);
 ?>
