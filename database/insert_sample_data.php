@@ -3,10 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Include the database connection file
-include __DIR__ . "/../backend/includes/db.php";
+include __DIR__ . "/../app/includes/db.php";
 
-// Function to execute query and handle errors
 function executeQuery($conn, $query) {
     if (mysqli_query($conn, $query)) {
         echo "Query executed successfully.<br>";
@@ -18,7 +16,6 @@ function executeQuery($conn, $query) {
 // ================= TABLE CREATION =================
 echo "<h3>Creating Tables:</h3>";
 
-// Create employees table
 $employees_table = "CREATE TABLE IF NOT EXISTS employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     first_name TEXT NOT NULL,
@@ -33,7 +30,6 @@ $employees_table = "CREATE TABLE IF NOT EXISTS employees (
     PRIMARY KEY (employee_id)
 ) ENGINE = InnoDB, AUTO_INCREMENT = 101";
 
-// Create assets table
 $assets_table = "CREATE TABLE IF NOT EXISTS assets (
     asset_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -43,7 +39,6 @@ $assets_table = "CREATE TABLE IF NOT EXISTS assets (
     category VARCHAR(50)
 ) AUTO_INCREMENT = 301";
 
-// Create requests table
 $requests_table = "CREATE TABLE IF NOT EXISTS requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
@@ -57,7 +52,6 @@ $requests_table = "CREATE TABLE IF NOT EXISTS requests (
     FOREIGN KEY (asset_id) REFERENCES assets(asset_id) ON DELETE CASCADE
 ) AUTO_INCREMENT = 201";
 
-// Create assignments table
 $assignments_table = "CREATE TABLE IF NOT EXISTS assignments (
     assignment_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
@@ -83,7 +77,6 @@ executeQuery($conn, $requests_table);
 echo "Creating assignments table...<br>";
 executeQuery($conn, $assignments_table);
 
-// Add unique email constraint if not exists
 echo "Checking email constraint...<br>";
 $check_unique_query = "SELECT COUNT(*) as constraint_exists
                        FROM information_schema.TABLE_CONSTRAINTS
@@ -101,7 +94,6 @@ if ($row['constraint_exists'] == 0) {
 // ================= DATA INSERTION =================
 echo "<h3>Inserting Data:</h3>";
 
-// Insert Employees
 $employees = [
     [
         'first_name' => 'Michael',
