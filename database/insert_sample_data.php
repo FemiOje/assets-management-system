@@ -3,24 +3,48 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Create database if not exists
+$temp_conn = mysqli_connect("localhost", "root", "");
+if (!$temp_conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$create_db = "CREATE DATABASE IF NOT EXISTS asset_mgt_db";
+if (!mysqli_query($temp_conn, $create_db)) {
+    die("Error creating database: " . mysqli_error($temp_conn));
+}
+
+mysqli_close($temp_conn);
+
+// Connect to the database
 include __DIR__ . "/../app/includes/db.php";
 
-function executeQuery($conn, $query) {
-    if (mysqli_query($conn, $query)) {
-        echo "Query executed successfully.<br>";
-    } else {
+function executeQuery($conn, $query)
+{
+    if (!mysqli_query($conn, $query)) {
         echo "Error executing query: " . mysqli_error($conn) . "<br>";
     }
 }
 
-// ================= TABLE CREATION =================
-echo "<h3>Creating Tables:</h3>";
+// Disable foreign key checks
+mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 0");
 
-$employees_table = "CREATE TABLE IF NOT EXISTS employees (
+// Drop tables in reverse dependency order
+$tables = ['assignments', 'requests', 'assets', 'employees'];
+foreach ($tables as $table) {
+    $query = "DROP TABLE IF EXISTS $table";
+    executeQuery($conn, $query);
+}
+
+// Enable foreign key checks
+mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 1");
+
+// ================= TABLE CREATION =================
+$employees_table = "CREATE TABLE employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    email TEXT NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     department TEXT NULL,
     position TEXT NOT NULL,
@@ -28,9 +52,9 @@ $employees_table = "CREATE TABLE IF NOT EXISTS employees (
     date_joined DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status ENUM('ACTIVE', 'RESIGNED', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
     PRIMARY KEY (employee_id)
-) ENGINE = InnoDB, AUTO_INCREMENT = 101";
+) ENGINE = InnoDB AUTO_INCREMENT = 101";
 
-$assets_table = "CREATE TABLE IF NOT EXISTS assets (
+$assets_table = "CREATE TABLE assets (
     asset_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
@@ -39,20 +63,20 @@ $assets_table = "CREATE TABLE IF NOT EXISTS assets (
     category VARCHAR(50)
 ) AUTO_INCREMENT = 301";
 
-$requests_table = "CREATE TABLE IF NOT EXISTS requests (
+$requests_table = "CREATE TABLE requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
     asset_id INT NOT NULL,
     quantity INT NOT NULL,
     request_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('SUBMITTED', 'PENDING_APPROVAL', 'APPROVED', 'DECLINED') DEFAULT 'submitted',
+    status ENUM('SUBMITTED', 'PENDING_APPROVAL', 'APPROVED', 'DECLINED') DEFAULT 'SUBMITTED',
     hr_action BOOLEAN DEFAULT FALSE,
     manager_action BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE,
     FOREIGN KEY (asset_id) REFERENCES assets(asset_id) ON DELETE CASCADE
 ) AUTO_INCREMENT = 201";
 
-$assignments_table = "CREATE TABLE IF NOT EXISTS assignments (
+$assignments_table = "CREATE TABLE assignments (
     assignment_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
     asset_id INT NOT NULL,
@@ -65,19 +89,17 @@ $assignments_table = "CREATE TABLE IF NOT EXISTS assignments (
 ) AUTO_INCREMENT = 401";
 
 // Execute table creation
-echo "Creating employees table...<br>";
-executeQuery($conn, $employees_table);
+$tables = [
+    'employees' => $employees_table,
+    'assets' => $assets_table,
+    'requests' => $requests_table,
+    'assignments' => $assignments_table
+];
 
-echo "Creating assets table...<br>";
-executeQuery($conn, $assets_table);
+foreach ($tables as $name => $query) {
+    executeQuery($conn, $query);
+}
 
-echo "Creating requests table...<br>";
-executeQuery($conn, $requests_table);
-
-echo "Creating assignments table...<br>";
-executeQuery($conn, $assignments_table);
-
-echo "Checking email constraint...<br>";
 $check_unique_query = "SELECT COUNT(*) as constraint_exists
                        FROM information_schema.TABLE_CONSTRAINTS
                        WHERE TABLE_SCHEMA = DATABASE()
@@ -92,8 +114,6 @@ if ($row['constraint_exists'] == 0) {
 }
 
 // ================= DATA INSERTION =================
-echo "<h3>Inserting Data:</h3>";
-
 $employees = [
     [
         'first_name' => 'Michael',
@@ -170,7 +190,7 @@ $stmt_add_employees = mysqli_prepare($conn, $query_add_employees);
 
 foreach ($employees as $employee) {
     $hashed_password = password_hash($employee['password'], PASSWORD_DEFAULT);
-    
+
     mysqli_stmt_bind_param(
         $stmt_add_employees,
         "sssssssss",
@@ -184,10 +204,8 @@ foreach ($employees as $employee) {
         $employee['date_joined'],
         $employee['status']
     );
-    
-    if (mysqli_stmt_execute($stmt_add_employees)) {
-        echo "Added employee: {$employee['first_name']} {$employee['last_name']}<br>";
-    } else {
+
+    if (!mysqli_stmt_execute($stmt_add_employees)) {
         echo "Error adding employee: " . mysqli_stmt_error($stmt_add_employees) . "<br>";
     }
 }
@@ -233,9 +251,7 @@ foreach ($assets as $asset) {
         $asset['category']
     );
 
-    if (mysqli_stmt_execute($stmt_add_assets)) {
-        echo "Added asset: {$asset['name']}<br>";
-    } else {
+    if (!mysqli_stmt_execute($stmt_add_assets)) {
         echo "Error adding asset: " . mysqli_stmt_error($stmt_add_assets) . "<br>";
     }
 }
@@ -307,9 +323,7 @@ foreach ($requests as $request) {
         $request['manager_action']
     );
 
-    if (mysqli_stmt_execute($stmt_add_requests)) {
-        echo "Added request ID: " . mysqli_insert_id($conn) . "<br>";
-    } else {
+    if (!mysqli_stmt_execute($stmt_add_requests)) {
         echo "Error adding request: " . mysqli_stmt_error($stmt_add_requests) . "<br>";
     }
 }
@@ -348,9 +362,7 @@ foreach ($assignments as $assignment) {
         $assignment['request_id']
     );
 
-    if (mysqli_stmt_execute($stmt_add_assignments)) {
-        echo "Added assignment ID: " . mysqli_insert_id($conn) . "<br>";
-    } else {
+    if (!mysqli_stmt_execute($stmt_add_assignments)) {
         echo "Error adding assignment: " . mysqli_stmt_error($stmt_add_assignments) . "<br>";
     }
 }
@@ -362,6 +374,3 @@ mysqli_stmt_close($stmt_add_assets);
 mysqli_stmt_close($stmt_add_requests);
 mysqli_stmt_close($stmt_add_assignments);
 mysqli_close($conn);
-
-echo "<h3>Script execution completed!</h3>";
-?>
