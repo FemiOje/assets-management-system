@@ -14,7 +14,7 @@
     <div class="landing-page">
         <div class="overlay">
             <div class="content">
-                <h1>Welcome to the Asset Management System</h1>
+                <h1><span class="animated-text">Welcome to the Asset Management System</span></h1>
                 <p class="tagline">Your Partner in Efficient Asset Management</p>
                 <p class="description">
                     Streamline your asset tracking, optimize resource allocation, and enhance productivity with our cutting-edge asset management system. Whether you're a small business or a large enterprise, our tools are designed to help you manage your assets effortlessly.

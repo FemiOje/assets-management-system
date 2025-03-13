@@ -22,14 +22,15 @@ include __DIR__ . "/../app/includes/db.php";
 function executeQuery($conn, $query)
 {
     if (!mysqli_query($conn, $query)) {
-        echo "Error executing query: " . mysqli_error($conn) . "<br>";
+        die("Critical error: " . mysqli_error($conn)); // Changed to die() for critical errors
     }
 }
 
+// ================= TABLE MANAGEMENT =================
 // Disable foreign key checks
 mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 0");
 
-// Drop tables in reverse dependency order
+// Drop tables in PROPER reverse dependency order
 $tables = ['assignments', 'requests', 'assets', 'employees'];
 foreach ($tables as $table) {
     $query = "DROP TABLE IF EXISTS $table";
@@ -40,7 +41,7 @@ foreach ($tables as $table) {
 mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 1");
 
 // ================= TABLE CREATION =================
-$employees_table = "CREATE TABLE employees (
+$employees_table = "CREATE TABLE IF NOT EXISTS employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
@@ -54,7 +55,7 @@ $employees_table = "CREATE TABLE employees (
     PRIMARY KEY (employee_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 101";
 
-$assets_table = "CREATE TABLE assets (
+$assets_table = "CREATE TABLE IF NOT EXISTS assets (
     asset_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
@@ -63,7 +64,7 @@ $assets_table = "CREATE TABLE assets (
     category VARCHAR(50)
 ) AUTO_INCREMENT = 301";
 
-$requests_table = "CREATE TABLE requests (
+$requests_table = "CREATE TABLE IF NOT EXISTS requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
     asset_id INT NOT NULL,
@@ -76,7 +77,7 @@ $requests_table = "CREATE TABLE requests (
     FOREIGN KEY (asset_id) REFERENCES assets(asset_id) ON DELETE CASCADE
 ) AUTO_INCREMENT = 201";
 
-$assignments_table = "CREATE TABLE assignments (
+$assignments_table = "CREATE TABLE IF NOT EXISTS assignments (
     assignment_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT NOT NULL,
     asset_id INT NOT NULL,
