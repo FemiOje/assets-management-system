@@ -1,3 +1,7 @@
+<?php
+    include "../database/insert_sample_data.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
