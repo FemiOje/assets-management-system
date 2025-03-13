@@ -100,121 +100,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Asset Management</title>
     <link rel="stylesheet" href="../styles/signup.css">
 </head>
-
 <body>
     <div class="auth-page">
         <div class="auth-container">
-            <h2>Create your account</h2>
-            <?php if (!empty($errors)): ?>
-                <div class="alert alert-danger">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?php echo $error ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <!-- Side Image -->
+            <div class="side-image">
+                <img src="../styles/sign-up.png" alt="Welcome Image">
+            </div>
 
-            <form id="signup-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" class="form-control" value="<?php echo $first_name; ?>" required>
+            <!-- Signup Form -->
+            <div class="form-section">
+                <h2>Create Your Account</h2>
+
+                <?php if (!empty($errors)): ?>
+                    <div class="error-message">
+                        <?php foreach ($errors as $error): ?>
+                            <p><?php echo $error ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
+                <form id="signup-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" value="<?php echo $first_name; ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" value="<?php echo $last_name; ?>" required>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" name="last_name" class="form-control" value="<?php echo $last_name; ?>" required>
+                        <label>Email</label>
+                        <input type="email" name="email" value="<?php echo $email; ?>" required>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" required>
-                </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                    </div>
 
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="IT">IT</option>
+                            <option value="HR">HR</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Operations">Operations</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Department</label>
-                    <select name="department" class="form-control">
-                        <option value="">Select Department</option>
-                        <option value="IT">IT</option>
-                        <option value="HR">HR</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Operations">Operations</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" name="position" value="<?php echo $position; ?>" required>
+                    </div>
 
-                <div class="form-group">
-                    <label>Position</label>
-                    <input type="text" name="position" class="form-control" value="<?php echo $position; ?>" required>
-                </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select name="role" required>
+                            <option value="">Select Role</option>
+                            <option value="EMPLOYEE">Employee</option>
+                            <option value="HR">HR</option>
+                            <option value="MANAGER">Manager</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Role</label>
-                    <select name="role" id="position" class="form-control" required>
-                        <option value="">Select Role</option>
-                        <option value="EMPLOYEE">Employee</option>
-                        <option value="HR">HR</option>
-                        <option value="MANAGER">Manager</option>
-                    </select>
-                </div>
+                    <button type="submit" class="auth-btn">Register</button>
+                </form>
 
-                <button type="submit" class="auth-btn">Register</button>
-            </form>
-            <p class="auth-link">Already have an account? <a href="./login.php">Log In</a></p>
+                <p class="auth-link">Already have an account? <a href="./login.php">Log In</a></p>
+            </div>
         </div>
     </div>
-
-
-    <!-- ---------------------------IRABOR---------------------------- -->
-    <!-- <div class="auth-page">
-        <div class="auth-container">
-            <h2>Create Your Account</h2>
-            <form id="signup-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="first-name" placeholder="First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="last-name" placeholder="Last Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="Email Address*" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="department" placeholder="Department" required>
-                </div>
-                <div class="form-group">
-                    <select id="position" required>
-                        <option value="">Select Position</option>
-                        <option value="manager">Manager</option>
-                        <option value="hr">HR</option>
-                        <option value="employee">Employee</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" placeholder="Password*" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="confirm-password" placeholder="Confirm Password*" required>
-                </div>
-                <button type="submit" class="auth-btn">Sign Up</button>
-            </form>
-            <p class="auth-link">Already have an account? <a href="login.html">Log In</a></p>
-        </div>
-    </div> -->
 </body>
-
 </html>
 
 <?php

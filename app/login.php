@@ -48,54 +48,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/login.css">
     <title>Log In - Asset Management</title>
 </head>
-
 <body>
     <div class="auth-page">
         <div class="auth-container">
-            <div class="wave-bg"></div>
+            <!-- Side Image -->
+            <div class="side-image">
+                <img src="../styles/log-in.png" alt="Welcome Image">
+            </div>
 
-            <h2>Welcome Back</h2>
-            <form id="login-form" action="login.php" method="post">
-                <div class="form-group email">
-                    <br>
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" required>
-                    <br>
-                </div>
+            <!-- Login Form -->
+            <div class="form-section">
+                <h2>Welcome Back</h2>
+                <form id="login-form" action="login.php" method="post">
+                    <div class="form-group email">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" required>
+                    </div>
 
-                <div class="form-group password">
-                    <br>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" required>
-                    <br>
-                </div>
+                    <div class="form-group password">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" required>
+                    </div>
 
-                <?php if ($error_message): ?>
-                    <div style="color: red;"><?php echo $error_message; ?></div>
-                <?php endif; ?>
+                    <?php if ($error_message): ?>
+                        <div class="error-message"><?php echo $error_message; ?></div>
+                    <?php endif; ?>
 
-                <?php if ($success_message): ?>
-                    <div style="color: green;"><?php echo $success_message; ?></div>
-                <?php endif; ?>
+                    <?php if ($success_message): ?>
+                        <div class="success-message"><?php echo $success_message; ?></div>
+                    <?php endif; ?>
 
-                <div class="submit">
-                    <br>
-                    <input type="submit" name="submit" value="Log in" class="auth-btn">
-                </div>
-            </form>
-            <p class="auth-link">Don't have an account? <a href="./signup.php">Sign Up</a></p>
+                    <div class="submit">
+                        <input type="submit" name="submit" value="Log in" class="auth-btn">
+                    </div>
+                </form>
+                <p class="auth-link">Don't have an account? <a href="./signup.php">Sign Up</a></p>
+            </div>
         </div>
     </div>
-
 </body>
-
 </html>
 
 <?php
