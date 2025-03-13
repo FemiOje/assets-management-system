@@ -368,7 +368,6 @@ foreach ($assignments as $assignment) {
 }
 
 // ================= CLEANUP =================
-echo "<h3>Cleanup:</h3>";
 mysqli_stmt_close($stmt_add_employees);
 mysqli_stmt_close($stmt_add_assets);
 mysqli_stmt_close($stmt_add_requests);
