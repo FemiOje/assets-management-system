@@ -9,28 +9,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asset Management System</title>
     <link rel="stylesheet" href="../styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="landing-page">
-        <div class="overlay">
-            <div class="content">
-                <h1><span class="animated-text">Welcome to the Asset Management System</span></h1>
-                <p class="tagline">Your Partner in Efficient Asset Management</p>
-                <p class="description">
-                    Streamline your asset tracking, optimize resource allocation, and enhance productivity with our cutting-edge asset management system. Whether you're a small business or a large enterprise, our tools are designed to help you manage your assets effortlessly.
+    <nav>
+        <div class="logo">AMS</div>
+        <a href="login.php" class="nav-login">Login</a>
+    </nav>
+    
+    <main>
+        <div class="hero">
+            <h1>Manage assets<br>with precision</h1>
+            <div class="hero-content">
+                <p>
+                    A modern solution for tracking and managing your business assets. 
+                    Simple. Efficient. Reliable.
                 </p>
-                <div class="buttons">
-                    <a href="signup.php">
-                        <button id="signup-btn">Get Started</button>
-                    </a>
-                    <a href="login.php">
-                        <button id="login-btn">Login</button>
-                    </a>
-                </div>
+                <a href="signup.php" class="cta-button">Start Now</a>
             </div>
         </div>
-    </div>
-
-    <script src="script.js"></script>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="number">01</span>
+                <h2>Track</h2>
+                <p>Real-time asset tracking and monitoring</p>
+            </div>
+            <div class="feature">
+                <span class="number">02</span>
+                <h2>Analyze</h2>
+                <p>Detailed analytics and reporting tools</p>
+            </div>
+            <div class="feature">
+                <span class="number">03</span>
+                <h2>Optimize</h2>
+                <p>Resource optimization and allocation</p>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
