@@ -17,7 +17,7 @@ body {
 
 /* Dashboard Layout */
 .dashboard-container {
-    display: grid;
+    /* display: grid; */
     grid-template-columns: 280px 1fr;
     min-height: 100vh;
     position: relative;
@@ -255,9 +255,20 @@ tr:hover {
     font-weight: 500;
 }
 
-.status-pending { background: #f3f4f6; color: #374151; }
-.status-approved { background: #ecfdf5; color: #065f46; }
-.status-declined { background: #fef2f2; color: #991b1b; }
+.status-pending {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.status-approved {
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+.status-declined {
+    background: #fef2f2;
+    color: #991b1b;
+}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -315,7 +326,8 @@ tr:hover {
         -webkit-overflow-scrolling: touch;
     }
 
-    td, th {
+    td,
+    th {
         padding: 0.75rem;
         font-size: 0.875rem;
     }
@@ -532,7 +544,7 @@ tr:hover {
 
 /* View Requests Section */
 .employee-requests .table {
-    table-layout: fixed;
+    /* table-layout: fixed; */
 }
 
 .employee-requests th {
@@ -598,6 +610,7 @@ tr:hover {
     background: #fff;
     padding: 2rem;
     margin-top: 4rem;
+    width: 10vh;
 }
 
 .dashboard-footer p {
@@ -625,7 +638,8 @@ tr:hover {
         font-size: 0.875rem;
     }
 
-    .asset-status, .request-status {
+    .asset-status,
+    .request-status {
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
