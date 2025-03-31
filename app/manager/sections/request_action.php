@@ -26,7 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_stmt_bind_param($stmt2, 'i', $request_id);
 
             if (mysqli_stmt_execute($stmt2)) {
-                $success = "Request #$request_id approved and assigned successfully.";
+                // Update the available quantity of the asset
+                $update_quantity_sql = "UPDATE assets a 
+                                      JOIN requests r ON a.asset_id = r.asset_id 
+                                      SET a.available_quantity = a.available_quantity - 1 
+                                      WHERE r.request_id = ?";
+                $stmt3 = mysqli_prepare($conn, $update_quantity_sql);
+                mysqli_stmt_bind_param($stmt3, 'i', $request_id);
+
+                if (mysqli_stmt_execute($stmt3)) {
+                    $success = "Request #$request_id approved and assigned successfully.";
+                } else {
+                    $error = "Error updating asset quantity: " . mysqli_error($conn);
+                }
+                mysqli_stmt_close($stmt3);
             } else {
                 $error = "Error assigning asset: " . mysqli_error($conn);
             }

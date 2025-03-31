@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Database connection
+// Database conn
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -110,11 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="auth-page">
         <div class="auth-container">
-            <!-- Side Image -->
-            <div class="side-image">
-                <img src="../styles/sign-up.png" alt="Welcome Image">
-            </div>
-
             <!-- Signup Form -->
             <div class="form-section">
                 <h2>Create Your Account</h2>

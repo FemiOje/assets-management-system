@@ -46,7 +46,7 @@ $employees_table = "CREATE TABLE IF NOT EXISTS employees (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
     department TEXT NULL,
     position TEXT NOT NULL,
     role ENUM('EMPLOYEE', 'HR', 'MANAGER') NOT NULL DEFAULT 'EMPLOYEE',

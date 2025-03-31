@@ -1,27 +1,32 @@
 /* Auth Page Container */
 .auth-page {
     width: 100%;
-    max-width: 700px; /* Adjust as needed */
-    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.9px;
+    /* max-width: 700px; Adjust as needed */
+    /* margin: 0 auto; */
 }
 
 /* Auth Container */
 .auth-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
     background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    
     overflow: hidden;
 }
 
 /* Side Image */
-.side-image {
+/* .side-image {
     flex: 1;
-    background-color: #7E57C2; /* Purple background */
+    background-color: #7E57C2; 
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .side-image img {
     width: 100%;
@@ -31,8 +36,10 @@
 
 /* Form Section */
 .form-section {
-    flex: 1;
-    padding: 1rem;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 4px 40px -10px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,7 +65,8 @@ label {
 
 input {
     width: 100%;
-    padding: 8px 10px;
+    padding: 12px 10px;
+    margin-bottom: 20px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     font-size: 0.85rem;
@@ -73,19 +81,19 @@ input:focus {
 
 .auth-btn {
     width: 100%;
-    padding: 8px;
-    background: #7E57C2; /* Purple button */
+    padding: 20px;
+    background: black;
+    border-radius: 10px;
     color: white;
     border: none;
-    border-radius: 6px;
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease-in-out;
 }
 
 .auth-btn:hover {
-    background: #6d4baf; /* Darker purple on hover */
+    background-color: rgb(27, 27, 27);
     transform: translateY(-1px);
 }
 

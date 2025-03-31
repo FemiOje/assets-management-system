@@ -57,11 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="auth-page">
         <div class="auth-container">
-            <!-- Side Image -->
-            <div class="side-image">
-                <img src="../styles/log-in.png" alt="Welcome Image">
-            </div>
-
             <!-- Login Form -->
             <div class="form-section">
                 <h2>Welcome Back</h2>

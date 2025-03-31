@@ -13,18 +13,19 @@ body {
 /* Auth Page Container */
 .auth-page {
     width: 100%;
-    max-width: 700px; /* Further reduced width */
+    height: 100vh;
+     /* Further reduced width */
     margin: 0 auto;
 }
 
 /* Auth Container */
 .auth-container {
     display: flex;
-    background: #ffffff;
-    border-radius: 10px; /* Smaller border radius */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
-    height: auto;
 }
 
 /* Side Image */
@@ -36,27 +37,27 @@ body {
     align-items: center;
 }
 
-.side-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+
 
 /* Form Section */
 .form-section {
-    flex: 1;
-    padding: 1rem; /* Further reduced padding */
+    width:fit-content;
+    border-radius: 20px;
+    box-shadow: 0 4px 40px -10px rgba(0, 0, 0, 0.1);
+    padding: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 h2 {
     color: #2d3748;
     text-align: center;
     margin-bottom: 1rem; /* Reduced margin */
-    font-size: 1.25rem; /* Smaller font size */
+    font-size: 2.25rem; /* Smaller font size */
 }
+
 
 .form-row {
     display: flex;
@@ -79,8 +80,9 @@ label {
 
 input, select {
     width: 100%;
-    padding: 8px 10px; /* Further reduced padding */
+    padding: 12px 10px; /* Further reduced padding */
     border: 1px solid #e2e8f0; /* Thinner border */
+    margin-bottom: 20px;
     border-radius: 6px; /* Smaller border radius */
     font-size: 0.85rem; /* Smaller font size */
     transition: all 0.2s ease; /* Faster transition */
@@ -100,8 +102,9 @@ select {
 
 .auth-btn {
     width: 100%;
-    padding: 8px; /* Further reduced padding */
-    background: #7E57C2;
+    padding: 20px;
+    background: black;
+    border-radius: 10px;
     color: white;
     border: none;
     border-radius: 6px; /* Smaller border radius */

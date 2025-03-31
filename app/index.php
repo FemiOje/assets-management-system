@@ -19,13 +19,20 @@
     
     <main>
         <div class="hero">
-            <h1>Manage assets<br>with precision</h1>
+            
             <div class="hero-content">
+                <div class="col-1">
+                <h1>Manage assets<br>with precision</h1>
                 <p>
                     A modern solution for tracking and managing your business assets. 
                     Simple. Efficient. Reliable.
                 </p>
                 <a href="signup.php" class="cta-button">Start Now</a>
+                </div>
+                <div class="col-2">
+                    <img src="../images/landing.svg" class="landing-img"/>
+                </div>
+                
             </div>
         </div>
         
